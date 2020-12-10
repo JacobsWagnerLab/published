@@ -7,3 +7,4 @@ This repository is organized in the following way:
   - [simulation](./simulation): code used to simulate polymer conformations
   - [cryo_ET](./cryo_ET): code used to construct density maps for ribosomes localized in cryo-ET
   - [pixel_correlation](./pixel_correlation): code used to calculate the correlation between pixel intensities
+  - [demograph](./demograph): code used to construct the demograph plots
