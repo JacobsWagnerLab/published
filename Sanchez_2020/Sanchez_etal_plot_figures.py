@@ -7,8 +7,8 @@ Created on Tue May 18 13:47:17 2021
 """
 
 import pandas as pd
-import Sanchez_etal_figure_functions as paper_fig # from the JacobsWagnerLab:
-# 
+import Sanchez_etal_figure_functions as paper_fig # from the JacobsWagnerLab Github:
+# https://github.com/JacobsWagnerLab/published/raw/master/Sanchez_2020/Sanchez_etal_figure_functions.py
 
 
 # load the microtubule position/angle Pandas DataFrames from the JacobsWagnerLab Github
