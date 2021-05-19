@@ -19,6 +19,7 @@ import tracking_class as mtc
 # Run the class file
 # If the class scipt and this script are in the same folder, the class script can be imported here
 
+# A list containing the fast time-lapse images
 image_paths = ['/Control_images/6.23.20.ex111.wow47.KK1218.0013.nd2',
                '/Control_images/6.23.20.ex111.wow47.KK1218.0022.nd2',
                '/Control_images/6.23.20.ex111.wow47.KK1218.0025.nd2',
@@ -27,7 +28,7 @@ image_paths = ['/Control_images/6.23.20.ex111.wow47.KK1218.0013.nd2',
                '/Control_images/7.22.20.ex111.wow47.KK1218.0005.nd2',
                '/Control_images/7.30.20.ex111.wow47.KK1218.0003.nd2']
 
-
+# A list containing snapshots with the gut/ebryo markers
 snapshot_paths = ['/Control_images/6.23.20.ex111.wow47.KK1218.0014.nd2',
                   '/Control_images/6.23.20.ex111.wow47.KK1218.0023.nd2',
                   '/Control_images/6.23.20.ex111.wow47.KK1218.0026.nd2',
@@ -36,9 +37,10 @@ snapshot_paths = ['/Control_images/6.23.20.ex111.wow47.KK1218.0014.nd2',
                   '/Control_images/7.22.20.ex111.wow47.KK1218.0006.nd2',
                   '/Control_images/7.30.20.ex111.wow47.KK1218.0004.nd2']
 
-
+# The path to the directory where all data will be saved
 save_path = '/Ariana_Sanchez/Results'
 
+# The custom experiment IDs
 experiments = ['control_ex111.wow47.KK1218.0013',
                'control_ex111.wow47.KK1218.0022',
                'control_ex111.wow47.KK1218.0025',
