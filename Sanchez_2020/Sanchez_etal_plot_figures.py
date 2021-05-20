@@ -3,7 +3,7 @@
 Created on Tue May 18 13:47:17 2021
 
 @author: Alexandros Papagiannakis
-         Chrisitne Jacobs-Wagner lab, Stanford University
+         Christine Jacobs-Wagner lab, Stanford University
 """
 
 import pandas as pd
