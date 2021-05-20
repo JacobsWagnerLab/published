@@ -341,4 +341,4 @@ dependencies:
     - typing-extensions==3.7.4.3
     - utils==1.0.1
     - wxpython==4.1.0
-prefix: /Users/alexandros/opt/anaconda3
+prefix: /opt/anaconda3
