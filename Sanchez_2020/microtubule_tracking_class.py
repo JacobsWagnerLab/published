@@ -4,7 +4,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Apr 11 19:27:10 2020
-@author: Alexandros Papagiannakis, Christine-Jacobs Wagner lab, Stanford University, 2020
+@author: Alexandros Papagiannakis, Christine Jacobs-Wagner lab, Stanford University, 2020
 """
 
 # libraries
