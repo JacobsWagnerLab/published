@@ -13,8 +13,8 @@ import Sanchez_etal_figure_functions as paper_fig # from the JacobsWagnerLab Git
 
 # load the microtubule position/angle Pandas DataFrames from the JacobsWagnerLab Github
 control_path = 'https://github.com/JacobsWagnerLab/published/blob/master/Sanchez_2020/control_df?raw=true'
-mutant_10Bgut_path = 'https://github.com/JacobsWagnerLab/published/blob/master/Sanchez_2020/10Bgut_df?raw=true'
-mutant_62gut_path = 'https://github.com/JacobsWagnerLab/published/blob/master/Sanchez_2020/62gut_df?raw=true'
+mutant_10Bgut_path = 'https://github.com/JacobsWagnerLab/published/blob/master/Sanchez_2020/VAB_10Bgut_minus_df?raw=true'
+mutant_62gut_path = 'https://github.com/JacobsWagnerLab/published/blob/master/Sanchez_2020/WDR_62gut_minus_df?raw=true'
 control_df = pd.read_csv(control_path, compression='zip')
 mutant_10Bgut_df = pd.read_csv(mutant_10Bgut_path, compression='zip')
 mutant_62gut_df = pd.read_csv(mutant_62gut_path, compression='zip')
