@@ -4,7 +4,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jul  3 23:08:48 2020
-@author: Alexandros Papagiannakis, Christine-Jacobs Wagner lab, Stanford University, 2020
+@author: Alexandros Papagiannakis, Christine Jacobs-Wagner lab, Stanford University, 2020
 """
 
 from skimage import measure
