@@ -3,7 +3,7 @@
 Created on Tue May 18 12:59:41 2021
 
 @author: Alexandros Papagiannakis
-         Chrisitne Jacobs-Wagner lab, Stanford University
+         Christine Jacobs-Wagner lab, Stanford University
 """
 
 
