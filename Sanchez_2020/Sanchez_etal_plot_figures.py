@@ -92,5 +92,9 @@ paper_fig.plot_angle_distance_wrap(gut_df, mutant='62gut', min_length=6, plot_me
 
 # ------------------------ FIGURE S6G --------------------------#
 slopes, distance_list, time_list = paper_fig.plot_trajectories(distance_range=(0,2), min_length=4, gut_df=gut_df, save_path=None)
+for exp in slopes:
+    print(exp, len(slopes[exp]), 'trajectories')
 slopes, distance_list, time_list = paper_fig.plot_trajectories(distance_range=(2,5), min_length=4, gut_df=gut_df, save_path=None)
+for exp in slopes:
+    print(exp, len(slopes[exp]), 'trajectories')
 
