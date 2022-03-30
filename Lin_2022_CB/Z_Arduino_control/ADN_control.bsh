@@ -1,0 +1,59 @@
+
+import ij.process.*; 
+import java.lang.System;
+
+gui.clearMessageWindow();
+gui.message("Start script...");
+
+// state encoded as binary code
+s1 = 12; 
+s2 = 3;    
+
+w1ini = 16;
+w1 = 16;
+w2 = 16;
+
+int time_unit = 1000*60*60;  //hr
+//int time_unit = 1000*60; // min
+//int time_unit = 1000;  // second
+
+int eq_time = 3000; //  3 second
+
+// Sequence of output states from Arduino Uno
+//int[] state_array = {s1,s2,s1,s2,s1,s2,s1,s2,s1,s2, s1,s2,s1,s2,s1,s2,s1,s2,s1,s2, s1};     
+int[] state_array = { s1,s2, s1,s2, s1,s2, s1,s2, s1,s2, s1,s2, s1,s2, s1,s2, s1 };  
+
+// Sequence of waiting time for each output states (in AU)
+//int[] wait_time_array = { w1,w2,w1,w2,w1,w2,w1,w2,w1,w2, w1,w2,w1,w2,w1,w2,w1,w2,w1,w2, w1};
+int[] wait_time_array = { w1ini, w2, w1,w2, w1,w2, w1,w2, w1,w2, w1,w2, w1,w2, w1,w2, w1 };
+
+//=====================================================================================//
+// Code started.
+// Do not modify parameters below 
+//=====================================================================================//
+
+mmc.setProperty("Arduino-Switch","State", 3);
+
+for (int j=0; j < state_array.length; j++ ) {
+
+   // (1) Before every switch, close all valve for 10 second to allow pressure equilibrate
+   mmc.setProperty("Arduino-Switch","State", 0);	
+	Thread.sleep(eq_time);
+ 
+	// (2) Switch to new medium
+	
+	gui.message("begin step" + j );
+
+	state_label = state_array[j];
+	
+	mmc.setProperty("Arduino-Switch","State", state_label);
+	
+	wait_time_temp = time_unit * wait_time_array[j];
+		
+	Thread.sleep(wait_time_temp);
+
+}
+
+mmc.setProperty("Arduino-Switch","State", 3);
+gui.message("Script finished");
+
