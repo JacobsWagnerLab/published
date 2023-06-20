@@ -1,0 +1,7 @@
+
+Using ModelB for ODE simulation.
+
+dataset1; M9GlyCAAT (data_summaryC.mat)
+
+Fix parameters {Xini, Yini, cp, Zs} during the optimization.
+Weight [1 1 1 1 1 1] for curves
