@@ -1,6 +1,0 @@
-
-This is the new ODE model (including PQ model for RNAP active fraction).
-Fix parameters {Xini, Yini, cp, Zs} during the optimization.
-Fix k1,km1,k2,k3
-
-Use new mRNA degradation rate as initial parameter
