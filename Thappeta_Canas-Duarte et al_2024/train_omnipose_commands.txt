@@ -1,0 +1,3 @@
+Command for retraining Omnipose (run from omnipose-compatible environment in miniconda, see installation in https://github.com/kevinjohncutler/omnipose): 
+
+python -m omnipose --train --tyx 224,224 --use_gpu --dir "path_to_training_data" --mask_filter "_masks" --pretrained_model None --diameter 0 --nclasses 4 --learning_rate 0.1 --RAdam --batch_size 16 --n_epochs 4000 --save_every 100 --save_each --num_workers 32 --look_one_level_down --dataloader
