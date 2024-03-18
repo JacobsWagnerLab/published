@@ -1,3 +1,8 @@
 Command for retraining Omnipose (run from omnipose-compatible environment in miniconda, see installation in https://github.com/kevinjohncutler/omnipose): 
 
 python -m omnipose --train --tyx 224,224 --use_gpu --dir "path_to_training_data" --mask_filter "_masks" --pretrained_model None --diameter 0 --nclasses 4 --learning_rate 0.1 --RAdam --batch_size 16 --n_epochs 4000 --save_every 100 --save_each --num_workers 32 --look_one_level_down --dataloader
+
+
+Command for running the trained model 'merge_model_only':
+
+python -m omnipose --use_gpu --dir "path_to_images" --save_png --dir_above --no_npy --in_folders --omni --pretrained_model "path_to_model" --cluster --mask_threshold 1 --flow_threshold 0 --diameter 0 --nchan 1 --nclasses 4
