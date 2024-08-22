@@ -50,6 +50,22 @@
 %
 %   - Section 13. Cell width violin plots comparing below/above the otsu
 %   threshold for each condition.
+%
+%%%%%%%%%%%% REQUIRED SUPPLEMENTAL SCRIPTS FROM MATHWORKS CENTRAL %%%%%%%
+% I use some supplemental scripts from Mathworks to make this run for
+% dataframe construction and plotting. I reccoment you download and put
+% these in  your path for this script to work best.
+%   - Violin Plot version 1.7.0.0 by Holger Hoffmann. Used for sections 12
+%   and 13.
+%       https://www.mathworks.com/matlabcentral/fileexchange/45134-violin-plot
+%
+%   - Shaded Error Bar Version 1.65.0.4 by Rob Campbell. Used for section
+%   3.
+%       https://www.mathworks.com/matlabcentral/fileexchange/26311-raacampbell-shadederrorbar
+%
+%   - Padcat Version 1.4.0.0 by Jos. This is used for concatenating uneven
+%   vectors into a matrix, useful for sections 3, 12, 13.
+%       https://www.mathworks.com/matlabcentral/fileexchange/22909-padcat
 %% Section 1. Prepare the main dataframe.
 % Jessica has cells segmented by Oufti. Here, we will take the Oufti
 % segmentations to 1) count the number of plasmid foci within each Oufti
