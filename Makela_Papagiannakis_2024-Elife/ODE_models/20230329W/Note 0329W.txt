@@ -1,0 +1,4 @@
+
+Fix parameters {Xini, Yini, cp, Zs} during the optimization.
+Weight [1 2 1 2 1 2] for curves
+Use new mRNA degradation rate in the  initial parameter.
