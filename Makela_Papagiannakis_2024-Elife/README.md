@@ -1,4 +1,4 @@
-This repository includes the data-analysis and modeling scripts applied for the publication:
+This repository includes the data-analysis and modeling scripts applied for the publication: https://doi.org/10.7554/eLife.97465.2
 
 Title: Genome concentration limits cell growth and modulates proteome composition in Escherichia coli
 
@@ -6,6 +6,6 @@ Authors: Jarno Mäkelä, Alexandros Papagiannakis, Wei-Hsiang Lin, Michael C Lan
 
 Year: 2024
 
-Journal: eLife, https://doi.org/10.7554/eLife.97465.2, https://elifesciences.org/reviewed-preprints/97465
+Journal: eLife, https://elifesciences.org/reviewed-preprints/97465
 
 
