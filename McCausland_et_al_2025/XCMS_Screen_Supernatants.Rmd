@@ -1,0 +1,101 @@
+
+```{r echo = FALSE, results='hide', message=FALSE}
+library(xcms)
+library(batchtools)
+library(faahKO)
+library(RColorBrewer)
+library(pander)
+library(magrittr)
+library(pheatmap)
+library(SummarizedExperiment)
+library(dplyr)
+library(ggplot2)
+library(MsExperiment)
+library(writexl)
+
+```
+
+
+
+```{r}
+# XCMS PARAMETER SET - customized for your purposes
+# centroid selection parameters
+t1 <- Sys.time()
+cwp <- CentWaveParam(ppm = 20, peakwidth = c(6, 30), noise = 1000,
+                     prefilter = c(3, 1000), snthresh = 7)
+#Secondary processing step: Merge neighboring peaks if overlap - ONLY THE VERY CLOSE ONE
+mpp <- MergeNeighboringPeaksParam(expandRt = 0.1, ppm= 2.5, minProp=0.75)
+
+# This second fill peaks is just to get more peak filled by expanding the time and ppm
+fcp <- FillChromPeaksParam(expandRt=1, ppm=2.5)
+
+# The original code tries to do parallel computing, but the Biocparallel package is broken on my machine.
+register(SerialParam())
+
+
+#----------- READ DATA ----------
+#Get into the right directory and extract list of files
+setwd('//mothership2.stanford.edu/Data_06/Previous_member_B/Irnov Irnov/Scientist-Stanford/Data/LCMS/Data/QTOF/PolarC18/2022/20220502-PolarC18-Repeat523')
+files <- list.files(pattern='mzML')
+
+#Define the grouping
+#create new data frame with 'sample_group' and 'replicate'
+# Filename is usually XXXR_date.mzML. 
+#   - XXX is the sample group
+#   - R is the replicate number.
+# Extract both of these values for the dataframe.
+sample_groups <- c('bsk','bsk','bsk','sup','sup','sup')
+biological_replicates <- c(1,2,1,2,3,1,2,3,3)
+
+#create the initial dataframe with condition labels.
+pd <- data.frame(sample_group=sample_groups,biological_replicate=biological_replicates)
+
+#Read MS data using the grouping parameter above                                
+raw_data <- readMSData(files, pdata = new('NAnnotatedDataFrame', pd), mode='onDisk')
+raw_data <- filterRt(raw_data, c(90, 1200)) 
+
+#Get chromatogram using centroid wave parameters above.
+xdata <- findChromPeaks(raw_data, param = cwp,BPPARAM = SerialParam())
+
+# merge neighboring peaks if there is any overlap. 
+xdata_pp <- refineChromPeaks(xdata, mpp)
+
+#Assign the merged data into the original data structure xdata
+xdata <- xdata_pp
+
+# -------------- ALIGNMENT ----------------
+# Adjust retentiom time data using obiwarda algorithm
+xdata <- adjustRtime(xdata, param = ObiwarpParam(binSize = 0.05, response=25, distFun='cor'))
+
+# -------------- PEAK GROUPING ----------------
+# Group peaks and assign them to the groups from filenames.
+pdp <- PeakDensityParam(sampleGroups = xdata$sample_group, minFraction = 0.7, bw = 0.5)
+
+xdata <- groupChromPeaks(xdata, param = pdp)
+# -------------- FILL IN MISSING DATA ----------------
+xdata <- fillChromPeaks(xdata, param = ChromPeakAreaParam())
+
+# This second fill peaks is just to get more peak filled by expanding the time and ppm
+# This is optional, but Irnov found it to be useful in removing the majority of NA values
+xdata <- fillChromPeaks(xdata, param = fcp)
+
+
+# -------------- QUANTIFICATION ----------------
+#Add the filled in dataset into res variable
+res <- quantify(xdata, value = "into")
+
+# Combine the peak annotation data (from rowData function) with the quantification (from assay function)
+# into one data frame to get the final output
+final_output <- merge(rowData(res), assay(res), by='row.names', all=TRUE)
+
+# Round up values to 4 decimal point before saving, especially mzmed and rtmed
+final_output$mzmed <- round(final_output$mzmed,4)
+final_output$rtmed <- round(final_output$rtmed,4)
+t2 = Sys.time()
+
+# Save final output as csv file and also as RData file
+write_xlsx(final_output,'detected_mass_features.xlsx')
+print(t2-t1)
+
+```
+
