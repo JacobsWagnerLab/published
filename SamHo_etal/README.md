@@ -1,4 +1,4 @@
-# Particle diffusivity analysis during acute starvation
+# Quantification of cytoplasmic diffusion during acute carbon starvation
 
 Authors: Samuel Ho, Alexandros Papagiannakis and Christine Jacobs-Wagner
 
