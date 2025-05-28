@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FigS6</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>FigS7</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14465,10 +14465,6 @@ a.anchor-link {
   display: none;
 }
 
-.highlight  {
-  margin: 0.4em;
-}
-
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14478,9 +14474,26 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror pre {
+.CodeMirror.cm-s-jupyter .highlight pre {
+/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
+  padding: var(--jp-code-padding) 4px;
   margin: 0;
-  padding: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+
+}
+
+.jp-OutputArea-output pre {
+  line-height: inherit;
+  font-family: inherit;
+}
+
+.jp-RenderedText pre {
+  color: var(--jp-content-font-color1);
+  font-size: var(--jp-code-font-size);
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14524,6 +14537,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 /* Hiding the collapser by default */
 .jp-Collapser {
   display: none;
+}
+
+@page {
+    margin: 0.5in; /* Margin for each printed piece of paper */
 }
 
 @media print {
@@ -14582,7 +14599,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
-<h1 id="Figure-S6:-BSK-II-alone-and-Rabbit-Serum-can-digest-purified-peptidoglycan.">Figure S6: BSK-II alone and Rabbit Serum can digest purified peptidoglycan.<a class="anchor-link" href="#Figure-S6:-BSK-II-alone-and-Rabbit-Serum-can-digest-purified-peptidoglycan.">&#182;</a></h1><ul>
+<h1 id="Figure-S7:-BSK-II-alone-and-Rabbit-Serum-can-digest-purified-peptidoglycan.">Figure S7: BSK-II alone and Rabbit Serum can digest purified peptidoglycan.<a class="anchor-link" href="#Figure-S7:-BSK-II-alone-and-Rabbit-Serum-can-digest-purified-peptidoglycan.">&#182;</a></h1><ul>
 <li>Irnov Irnov purified the <em>Borrlia burgdorferi</em> peptidoglycan for this experiment.</li>
 <li>Irnov Irnov designed and completed the original experiment. He tested many different potential media sources.</li>
 <li>Joshua W. McCausland wrote the code and analyzed the data.</li>
@@ -14718,9 +14735,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
@@ -14822,9 +14837,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
