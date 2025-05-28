@@ -14465,10 +14465,6 @@ a.anchor-link {
   display: none;
 }
 
-.highlight  {
-  margin: 0.4em;
-}
-
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14478,9 +14474,26 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror pre {
+.CodeMirror.cm-s-jupyter .highlight pre {
+/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
+  padding: var(--jp-code-padding) 4px;
   margin: 0;
-  padding: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+
+}
+
+.jp-OutputArea-output pre {
+  line-height: inherit;
+  font-family: inherit;
+}
+
+.jp-RenderedText pre {
+  color: var(--jp-content-font-color1);
+  font-size: var(--jp-code-font-size);
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14524,6 +14537,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 /* Hiding the collapser by default */
 .jp-Collapser {
   display: none;
+}
+
+@page {
+    margin: 0.5in; /* Margin for each printed piece of paper */
 }
 
 @media print {
@@ -14582,7 +14599,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
-<h1 id="Figure-1,-S8:-Mass-spectrometry-of-B.-burgdorferi-supernatant-identifies-four-shed-PG-species.">Figure 1, S8: Mass spectrometry of B. burgdorferi supernatant identifies four shed PG species.<a class="anchor-link" href="#Figure-1,-S8:-Mass-spectrometry-of-B.-burgdorferi-supernatant-identifies-four-shed-PG-species.">&#182;</a></h1><p>This code prepares the plots as found in <strong>Figure 1A</strong>, <strong>Figure 1E</strong>, and <strong>Figure S8.</strong> All share the same source data.</p>
+<h1 id="Figure-1,-S9:-Mass-spectrometry-of-B.-burgdorferi-supernatant-identifies-four-shed-PG-species.">Figure 1, S9: Mass spectrometry of B. burgdorferi supernatant identifies four shed PG species.<a class="anchor-link" href="#Figure-1,-S9:-Mass-spectrometry-of-B.-burgdorferi-supernatant-identifies-four-shed-PG-species.">&#182;</a></h1><p>This code prepares the plots as found in <strong>Figure 1A</strong>, <strong>Figure 1E</strong>, and <strong>Figure S8.</strong> All share the same source data.</p>
 <ul>
 <li>Irnov Irnov designed and completed all experiments for this figure.</li>
 <li>Irnov Irnov wrote code and completed analysis for Figure 1A.</li>
@@ -14643,9 +14660,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
@@ -14994,9 +15009,7 @@ Mean2 = mean from Bb stationary phase sup</p>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
@@ -15338,9 +15351,7 @@ to a library of muropeptides, Supplementary Dataset 1 in the paper. Here, it is 
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
@@ -15493,9 +15504,7 @@ to a library of muropeptides, Supplementary Dataset 1 in the paper. Here, it is 
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 
@@ -15816,9 +15825,7 @@ to a library of muropeptides, Supplementary Dataset 1 in the paper. Here, it is 
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16012,9 +16019,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
@@ -16358,9 +16363,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
 
@@ -16372,9 +16375,7 @@ class="
 </div>
 
 </div>
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16459,9 +16460,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
 
@@ -16473,9 +16472,7 @@ class="
 </div>
 
 </div>
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16659,9 +16656,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16676,9 +16671,7 @@ class="
 </div>
 
 </div>
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
