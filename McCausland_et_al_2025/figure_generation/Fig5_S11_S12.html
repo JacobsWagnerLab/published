@@ -14555,40 +14555,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 }
 </style>
 
-<!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe"> </script>
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
-    init_mathjax = function() {
-        if (window.MathJax) {
-        // MathJax loaded
-            MathJax.Hub.Config({
-                TeX: {
-                    equationNumbers: {
-                    autoNumber: "AMS",
-                    useLabelIds: true
-                    }
-                },
-                tex2jax: {
-                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                    processEscapes: true,
-                    processEnvironments: true
-                },
-                displayAlign: 'center',
-                CommonHTML: {
-                    linebreaks: {
-                    automatic: true
-                    }
-                }
-            });
-
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        }
-    }
-    init_mathjax();
-    </script>
-    <!-- End of mathjax configuration --></head>
+</head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
@@ -14597,8 +14564,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
 <h1 id="Figures-5,-S11,-and-S12:-Immune-response-to-PG-fragments.">Figures 5, S11, and S12: Immune response to PG fragments.<a class="anchor-link" href="#Figures-5,-S11,-and-S12:-Immune-response-to-PG-fragments.">&#182;</a></h1><p>This code prepares the plots as found in all of Figures 5, S10, and S11. Since these are based on smaller files rather than large mass spec dataframes, all the raw data can be accessed here on Github in the directory &quot;included_small_datasets.&quot;</p>
 <p>Additionally, little extra work is required for analysis besides plotting. Code here largely just imports dataframes then plots immediately after short rearrangement. All data were gathered by Zachary A. Kloos and Nicole D. Sonnert. Analysis and code by Joshua W. McCausland.</p>
 
