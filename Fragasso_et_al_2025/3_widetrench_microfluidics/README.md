@@ -29,7 +29,7 @@ regions when building phase / (SYTOX/LL-37 fluor) overlay kymographs— see fold
 |---|---|---|---|
 | `CJW7753_2XMIC_wide-trench`, `CJW7753_10XMIC_wide-trench` | CJW7753 | ribosome (RplA-GFP) + phase | growth-rate kymographs ([`growth_rate/`](growth_rate/)) |
 | `CJW7845_2XMIC_wide-trench` | CJW7845 | phase + SYTOX Green | SYTOX Green fluorescence kymographs ([`fluorescence_kymographs/`](fluorescence_kymographs/)) |
-| `CJW7859_4xMIC_wide-trench_LL-37_fluor` | CJW7859 | phase + fluorescently labeled LL-37 | LL-37 fluorescence kymographs + bottom-of-trench quantification ([`fluorescence_kymographs/`](fluorescence_kymographs/)) |
+| `CJW7859_4xMIC_wide-trench_LL-37_fluor` | CJW7859 | phase + LL-37 fluor. | LL-37 fluorescence kymographs + bottom-of-trench quantification ([`fluorescence_kymographs/`](fluorescence_kymographs/)) |
 
 ## Files in this folder
 
