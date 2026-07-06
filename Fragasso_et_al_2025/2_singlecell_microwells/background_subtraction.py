@@ -10,7 +10,7 @@ import scipy.ndimage as ndi
 import matplotlib.pyplot as plt
 
 '''
-This function applies background subtraction to inpput img, using mask to remove cell mask regions (after dilation). Code adapted from (Papagiannakis et al.,eLife, 2025).
+This function applies background subtraction to inpput img, using mask to remove cell mask regions (after dilation). Code adapted from (Papagiannakis et al., eLife, 2025).
 It's modified to convert numpy arrays to cupy arrays to run on GPU.
 '''
 
