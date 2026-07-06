@@ -64,7 +64,6 @@ concentration).
 | `CJW7859_4xMIC_wide-trench_LL-37_fluor` | CJW7859 | phase + fluorescently labeled LL-37 | 3 — LL-37 fluorescence kymographs | Fig. 5H; S8E–G |
 | `ATCC25922GFP_biofilm_rep1`, `ATCC25922GFP_biofilm_rep2`, `ATCC25922GFP_biofilm_rep3` | ATCC 25922-GFP | GFP + SYTOX Orange / EbbaBiolight 680 | 4 — biofilm quantification + 3D rendering | Fig. 6; S9C–D |
 | `PSF_theoretical` | — | theoretical PSFs (GFP / SYTOX Orange / EbbaBiolight 680) | 4 — Deconwolf deconvolution of the biofilm z-stacks | Fig. 6; S9C–D |
-| *(microplate-reader OD tables)* | MG1655 / ATCC 25922 | OD₆₀₀ | 1 — MIC / growth rate | Fig. 1A; S1 |
 
 ### General data → analysis flow
 
