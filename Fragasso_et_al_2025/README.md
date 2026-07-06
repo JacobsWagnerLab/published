@@ -61,7 +61,7 @@ concentration).
 | `MG1655_5-TAMRA-AMPs_50nM_AMPs_2XMIC` | MG1655 | label-free (5-TAMRA-AMP spike-in) | 2 — AMP uptake over time (with linking) | Fig. 4A; S7A |
 | `CJW7753_2XMIC_wide-trench`, `CJW7753_10XMIC_wide-trench` | CJW7753 | ribosome (RplA-GFP) + phase | 3 — growth-rate kymographs | Fig. 5C–F, I; S8A–B |
 | `CJW7845_2XMIC_wide-trench` | CJW7845 | phase + SYTOX Green | 3 — SYTOX Green fluorescence kymographs | Fig. 5G; S8C–D |
-| `CJW7859_4xMIC_wide-trench_LL-37_fluor` | CJW7859 | phase + fluorescently labeled LL-37 | 3 — LL-37 fluorescence kymographs | Fig. 5H; S8E–G |
+| `CJW7859_4xMIC_wide-trench_LL-37_fluor` | CJW7859 | phase + LL-37 | 3 — LL-37 fluorescence kymographs | Fig. 5H; S8E–G |
 | `ATCC25922GFP_biofilm_rep1`, `ATCC25922GFP_biofilm_rep2`, `ATCC25922GFP_biofilm_rep3` | ATCC 25922-GFP | GFP + SYTOX Orange / EbbaBiolight 680 | 4 — biofilm z-stacks | Fig. 6; S9C–D |
 | `PSF_theoretical` | — | theoretical PSFs (GFP / SYTOX Orange / EbbaBiolight 680) | 4 — Deconwolf deconvolution of the biofilm z-stacks | Fig. 6; S9C–D |
 
