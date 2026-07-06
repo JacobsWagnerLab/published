@@ -2,7 +2,7 @@
 
 Analysis code accompanying the manuscript titled 'Time-resolved phenotyping at 
 subcellular resolution reveals shared principles and key trade-offs across 
-antimicrobial peptide activities'
+antimicrobial peptide activities', https://www.biorxiv.org/content/10.1101/2025.04.10.648262v3.
 
 This repository contains the custom Python code used to process and quantify
 the microscopy data. The raw microscopy images are deposited
@@ -173,6 +173,7 @@ block of paths and parameters near the top that you edit before running.
   https://github.com/JacobsWagnerLab/published/tree/master/Fragasso_et_al_2025.
 - **Imaging data:** BioImage Archive accession
   [S-BIAD1823](https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD1823).
+- **Article:** https://www.biorxiv.org/content/10.1101/2025.04.10.648262v3
 
 Please cite the manuscript and the BioImage Archive accession when using this
 code or data.
