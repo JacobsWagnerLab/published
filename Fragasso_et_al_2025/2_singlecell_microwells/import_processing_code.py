@@ -2,7 +2,7 @@
 """
 Code for single-cell analysis for images processed by SuperSegger-Omnipose :
 1) Imports cell arrays output from SuperSegger, containing cell masks, cropped channels, cell_ids, bounding boxess (https://github.com/wiggins-lab/SuperSegger/wiki/The-cell-data-files)
-2) Apply background subtraction (Adapted from Papagiannakis et al., bioRxiv, 2024) to fluorescence channels (full images)
+2) Apply background subtraction (Adapted from Papagiannakis et al., eLife, 2025) to fluorescence channels (full images)
 3) Goes through each cell file output from Supersegger, extracts cell info, coordinates of the bounding box (cropped cell image), computes statistics using Omnipose masks, 
     computes masks for fluorescence channels (e.g. nucleoid, ribosomes), correlation (SCF) between the different channels
 
