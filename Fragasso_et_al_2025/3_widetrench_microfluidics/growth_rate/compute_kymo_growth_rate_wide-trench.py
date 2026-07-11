@@ -154,7 +154,6 @@ for AMP in AMP_list:
     Z_mat = Z.to_numpy()
 
     N_cells_final = df_tr_surv['cell_id'].nunique()
-    N_trenches = int(np.nansum(df_tr_surv['N_trenches'].unique()))
 
     '''Plot kymograph'''
     vmin, vmax = -0.01, 0.025
@@ -180,7 +179,7 @@ for AMP in AMP_list:
 
     ax.set_xlabel('Time since start of AMP injection (min)', fontsize=16)
     ax.set_ylabel(r'Center of mass y-coordinate ($\mu$m)', fontsize=16)
-    ax.set_title(f'{AMP_label}, N_cells = {N_cells_final}, N_trenches = {N_trenches}')
+    ax.set_title(f'{AMP_label}, N_cells = {N_cells_final}')
     cb = fig.colorbar(im, ax=ax)
     cb.set_label('Normalized growth rate (1/min)', fontsize=16)
     cb.ax.yaxis.set_tick_params(labelsize=16)

@@ -1,0 +1,26 @@
+# Python 3.10 (tested 3.10.16), Windows 10/11, NVIDIA GPU with CUDA 12.1
+#
+# Install PyTorch separately FIRST (CUDA 12.1 build), then `pip install -r requirements.txt`:
+#   pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu121
+#
+# cupy-cuda12x needs a working CUDA 12.x toolkit. On a CPU-only machine, remove it
+# and adapt the cupy/cupyx calls to numpy/scipy (see README section 4).
+
+numpy==2.2.6
+pandas==2.2.3
+scipy==1.15.2
+matplotlib==3.10.1
+seaborn==0.13.2
+scikit-image==0.25.2
+tifffile==2025.3.13
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+pillow==10.4.0
+keyboard==0.13.5
+cupy-cuda12x==13.4.0
+nd2==0.10.4
+
+# .nd2 reading via the Nikon ND2 SDK (native library must be installed separately).
+# Only needed for reading raw .nd2 files, not the deposited extracted data.
+pims==0.7
+pims-nd2==1.1

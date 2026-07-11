@@ -1,8 +1,9 @@
 # 3b — Wide-trench SYTOX Green / LL-37 fluorescence kymographs
 
-Fluorescence kymographs of SYTOX Green and LL-37 along
-the wide trenches, and the quantification of when LL-37 fluorescence reaches the
-bottom of empty trenches.
+Fluorescence kymographs of SYTOX Green and of LL-37's **intrinsic fluorescence**
+(LL-37 is not labeled — it is weakly autofluorescent, predominantly in the red
+channel, at 30 °C) along the wide trenches, and the quantification of when LL-37
+fluorescence reaches the bottom of empty trenches.
 
 **Figures:** 5G–H; S8C–G.
 

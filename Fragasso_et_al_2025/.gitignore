@@ -1,0 +1,19 @@
+# --- Demo datasets live on BioStudies (S-BIAD1823) as demos_datasets.zip, NOT in git ---
+# Ignore every data folder inside each demo (the dataset dirs one level below each demo),
+# while keeping the notebooks (6_demos/<demo>/*.ipynb) and any README.md tracked.
+6_demos/*/*/
+
+# Big / regenerable data anywhere
+*.zip
+*.nd2
+*.tif
+*.tiff
+
+# Python / Jupyter working detritus
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS junk
+.DS_Store
+Thumbs.db

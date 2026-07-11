@@ -6,13 +6,36 @@ Created on Fri Apr 11 14:47:43 2025
 """
 import cupy as cp
 import numpy as np
-import scipy.ndimage as ndi
+import cupy as cp
+import cupyx.scipy.ndimage as ndi
 import matplotlib.pyplot as plt
+from analysis_functions_library import get_median_back_img
 
 '''
-This function applies background subtraction to inpput img, using mask to remove cell mask regions (after dilation). Code adapted from (Papagiannakis et al., eLife, 2025).
+This function applies background subtraction to inpput img, using mask to remove cell mask regions (after dilation). Code adapted from (Papagiannakis et al.,eLife, 2025).
 It's modified to convert numpy arrays to cupy arrays to run on GPU.
 '''
+
+
+def get_median_back_img(img, img_cell_free, box_size, show_):
+    img_dim = img.shape
+    n_row = int(img_dim[0]/box_size)   # round to smallest integer
+    n_col = int(img_dim[1]/box_size)
+    # dim_new = n_row*box_size-sigma_, n_col*box_size-sigma_
+    median_back_img = cp.zeros(img_dim)
+    expand_window = False
+    for i in range(0,n_row):
+        for j in range(0,n_col):
+            box_temp = img_cell_free[i*box_size:(i+1)*box_size,j*box_size:(j+1)*box_size]
+            if np.any(box_temp>0)==False:
+                if show_:
+                    print('Using larger rolling window, too high cell density')
+                expand_window = True
+                return median_back_img, expand_window
+            else:    
+                median_back_img[i*box_size:(i+1)*box_size,j*box_size:(j+1)*box_size]=cp.median(box_temp[box_temp>0])
+    if show_:  print('Found correct box_size = ' + str(box_size))
+    return median_back_img, expand_window
 
 def local_bkg_sub_cp(img, mask, pos, exp, frame='',dilations=15, box_size = 128, sigma_=60, show=False):
     binary_mask = cp.asarray(mask>0)
