@@ -23,6 +23,8 @@ measured by microplate reader.
   biofilm strain MIC), mixed 50:50 with titrated AMP concentrations. The MIC is
   the lowest AMP concentration giving a maximum growth rate `< 0.2 log(OD)/h`
   within the first 20 h; the **mode** across ≥3 replicates is the final MIC.
+  These raw OD tables are **not** deposited at S-BIAD1823 or included in this
+  repository; the script documents the expected input format.
 
 ## Scripts can be run independently
 

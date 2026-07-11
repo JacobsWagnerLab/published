@@ -11,17 +11,15 @@ import numpy as np
 Can be used iteratively, e.g. first aligning by area over time_min, then align by SCF over t_align_area.
 '''
 
-def time_align(df, markers = ['area','SCF'], peak_values = ['max','max'], time_axis = 'time_min', window = [0,100]):
-    def shift_time_axis(df_group, marker, window, time_axis, peak_value):
-        df_group_w = df_group[(df_group[time_axis]>window[0]) & (df_group[time_axis]<window[1])]
-        if peak_value == 'min':
-            off_time = df_group.loc[df_group_w[marker].idxmin(), 'time_min']
-        elif peak_value == 'max': 
-            off_time = df_group.loc[df_group_w[marker].idxmax(), 'time_min']
-        df_group['t_align_'+marker] = df_group['time_min'] - off_time
-        return df_group
-    for i in range(len(markers)):
-        marker = markers[i]
-        peak_value = peak_values[i]
-        df = df.groupby('cell_id').apply(shift_time_axis, marker = marker, window = window, time_axis = time_axis, peak_value=peak_value).reset_index(drop=True)
+def time_align(df, markers=['area', 'SCF'], peak_values=['max', 'max'], time_axis='time_min_aligned', window=[0, 100]):
+    df = df.copy()
+    for marker, peak_value in zip(markers, peak_values):
+        def off_time_for_group(g):
+            gw = g[(g[time_axis] > window[0]) & (g[time_axis] < window[1])]
+            if len(gw) == 0:
+                return np.nan
+            idx = gw[marker].idxmin() if peak_value == 'min' else gw[marker].idxmax()
+            return g.loc[idx, 'time_min']
+        off_times = df.groupby('cell_id').apply(off_time_for_group, include_groups=False)
+        df['t_align_' + marker] = df['time_min'] - df['cell_id'].map(off_times)
     return df

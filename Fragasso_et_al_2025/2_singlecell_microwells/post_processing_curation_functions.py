@@ -4,8 +4,19 @@ Created on Fri Apr 11 14:49:20 2025
 
 @author: fragasso
 """
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pickle
+import pandas as pd
+import numpy as np
+import os
+from scipy import io
+import skimage
+import warnings
+import re
+warnings.filterwarnings('ignore')
 
-
+px_size = 0.065841  # um/px   (pixel size, 100x)
 
 '''Function to calculate normalized growth rate 'gr_smooth_norm' used for curation steps. For this study, px_size = 0.065841  um/px.
 It is calculated by smoothing the area signal using a 12-point moving average, and then calculating the first derivative of the smoothened signal.
@@ -38,6 +49,8 @@ def add_features_growth(df, fr, px_area = px_size**2, window_size = 5):
         
         return smoothed_y
     df['area_smooth'] = df.groupby('cell_id')['area'].transform(lambda x: dynamic_smooth(x.values))
+    df['time_min_aligned'] = df.groupby('cell_id')['time_min'].transform(lambda x: x-x.iloc[0])
+    df['time_min_offs'] = df['time_min'] - df['fr_inj'].iloc[0]
     cell_df_new = pd.DataFrame()
     for cell in list(df['cell_id'].unique()):
         cell_df = df[df['cell_id']==cell]

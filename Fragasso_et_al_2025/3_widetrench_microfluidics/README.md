@@ -29,7 +29,7 @@ regions when building phase / (SYTOX/LL-37 fluor) overlay kymographs— see fold
 |---|---|---|---|
 | `CJW7753_2XMIC_wide-trench`, `CJW7753_10XMIC_wide-trench` | CJW7753 | ribosome (RplA-GFP) + phase | growth-rate kymographs ([`growth_rate/`](growth_rate/)) |
 | `CJW7845_2XMIC_wide-trench` | CJW7845 | phase + SYTOX Green | SYTOX Green fluorescence kymographs ([`fluorescence_kymographs/`](fluorescence_kymographs/)) |
-| `CJW7859_4xMIC_wide-trench_LL-37_fluor` | CJW7859 | phase + LL-37 | LL-37 fluorescence kymographs + bottom-of-trench quantification ([`fluorescence_kymographs/`](fluorescence_kymographs/)) |
+| `CJW7859_4xMIC_wide-trench_LL-37_fluor` | CJW7859 | phase + LL-37 (intrinsic fluorescence) | LL-37 fluorescence kymographs + bottom-of-trench quantification ([`fluorescence_kymographs/`](fluorescence_kymographs/)) |
 
 ## Files in this folder
 
@@ -37,7 +37,7 @@ regions when building phase / (SYTOX/LL-37 fluor) overlay kymographs— see fold
 |---|---|
 | `drift_correction_wide_trenches.py` | Correct slow residual y-drift in the wide-trench phase-contrast image sequences (per-trench ROI selection) after SuperSegger drift correction was run. Shared first step for both workflows. |
 | `import_processing_code_wide-trench.py` | (Growth rate) Import the linked OmniSegger per-cell MATLAB files and build per-cell DataFrames. |
-| `post_processing_curation_code_wide-trench.py` | (Growth rate) Curate trajectories: remove tracks < 15 min, with anomalous normalized growth rate (> 0.04 or < −0.03 min⁻¹), or large center-of-mass jumps (> 50 px). |
+| `post_processing_curation_code_wide-trench.py` | (Growth rate) Curate trajectories: remove tracks < 15 min, with anomalous normalized growth rate (> 0.04 or < −0.03 min⁻¹), large center-of-mass jumps (> 50 px), or with areas > 3000 px or < 200. |
 
 
 ### Subfolders

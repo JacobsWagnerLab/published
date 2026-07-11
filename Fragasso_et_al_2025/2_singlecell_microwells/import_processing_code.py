@@ -2,7 +2,7 @@
 """
 Code for single-cell analysis for images processed by SuperSegger-Omnipose :
 1) Imports cell arrays output from SuperSegger, containing cell masks, cropped channels, cell_ids, bounding boxess (https://github.com/wiggins-lab/SuperSegger/wiki/The-cell-data-files)
-2) Apply background subtraction (Adapted from Papagiannakis et al., eLife, 2025) to fluorescence channels (full images)
+2) Apply background subtraction (Adapted from Papagiannakis et al., 2025) to fluorescence channels (full images)
 3) Goes through each cell file output from Supersegger, extracts cell info, coordinates of the bounding box (cropped cell image), computes statistics using Omnipose masks, 
     computes masks for fluorescence channels (e.g. nucleoid, ribosomes), correlation (SCF) between the different channels
 
@@ -62,46 +62,6 @@ cp.cuda.Device(0).use()
 
 runfile(r"path_to_functions_library.py",
         wdir=r"path_to_folder")
-
-
-
-'''
-This function is used to compute the nucleoid mask
-'''
-def get_fluor_mask(fluor_image,parameters=[2.5,0.95]):
-    """
-    Parameters are 
-    [0] sigma of the gaussian filter
-    [1] offset
-    """
-    log = -ndimage.gaussian_laplace(fluor_image, sigma=parameters[0])
-    log_norm = (log- np.min(log)) / (np.max(log) - np.min(log))
-    threshold_value = threshold_otsu(log_norm)
-    mask = log_norm > threshold_value*parameters[1]
-    return mask
-
-
-'''
-This function inputs the cell_stack founf in SuperSegger cell file and returns quantities: 
-A (cell area), rcm (center of mass), r_off (global coordinate of top left pixel), angle (angle between major axis and y=0), 
-x and y coordinates of bounding box, edge_flag (1 if cell is too close to the image edge)
-'''
-def get_cell_coordinates(cell_stack_temp):   # given cell stack from supersegger, extract cell coordinates
-    cell_coord = cell_stack_temp['coord'][0, 0][0, 0]
-    rcm = cell_coord[8][0]
-    A = cell_coord[0][0]
-    r_off = cell_stack_temp['r_offset'][0, 0][0]
-    angle = cell_coord[0][0][0]
-    edge_flag = cell_stack_temp['edgeFlag'][0, 0][0, 0]
-    BB = np.zeros(4, dtype=np.uint16)
-    for k in range(4):
-        BB[k] = cell_stack_temp['BB'][0][0][0][k]
-    x1 = BB[0]-1
-    y1 = BB[1]-1
-    x2 = BB[0]+BB[2]
-    y2 = BB[1]+BB[3]
-    
-    return A, rcm, r_off, angle, x1, x2, y1, y2, edge_flag
 
 
 '''

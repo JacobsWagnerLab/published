@@ -42,9 +42,6 @@ runfile(r"path_to_analysis_functions_library.py",
 runfile(r"path_to_post_processing_functions.py",
         wdir=r"path_to_folder")
 
-runfile(r"path_to_plot_videos_functions.py",
-        wdir=r"path_to_folder")
-
 
 '''Global variables'''
 fr = 1    # [min] time between frame
@@ -102,9 +99,9 @@ for pos in sorted(df['xy'].unique()):
     df_tr = pd.concat(df_tr_list, ignore_index=True)
     sns.scatterplot(df_pos_new, x='rcm_y', y='rcm_x_offset', hue='xy')
     plt.show()
-
+    
 df_tr = df_tr.groupby('cell_id', group_keys=False).apply(
-    add_gr_columns(window_size=15, min_len_for_savgol=15))
+    add_gr_columns, window_size=15, min_len_for_savgol=15)
 
 df = df_tr.copy()
 
@@ -149,6 +146,8 @@ plt.show()
 
 
 '''Export curated dataframe'''
-df = df.groupby('cell_id', group_keys=False).apply(add_gr_columns)    # recalculate gr after curation
+df_tr = df_tr.groupby('cell_id', group_keys=False).apply(
+    add_gr_columns, window_size=15, min_len_for_savgol=15)
+
 export_df(df, rep_path_list, exp_list,
           output_folder='output_2', df_name='_cell_features_df_trenches')

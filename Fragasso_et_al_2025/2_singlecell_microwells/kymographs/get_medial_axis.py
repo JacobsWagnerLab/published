@@ -8,10 +8,11 @@ Created on Fri Apr 11 16:12:59 2025
 
 import numpy as np
 import cupy as cp
+import cupyx.scipy.ndimage as ndi
 import matplotlib.pyplot as plt
 from scipy import ndimage
 from skimage import morphology
-
+import math 
 
 
 '''This function converts a 2D array of pixel intensities to a 3-column array with y, x, coordinates and pixel intensities'''
@@ -62,14 +63,25 @@ def rotateImage(img, angle, rcm , r_off, aug):
     return imgR[(padY[0]):(-padY[1]), (padX[0]) : (-padX[1])],imgR
 
 
-'''This function rotates adds padding the image by specified angle. Uses numpy arrays'''
-def rotateImage(img, angle, rcm , r_off, aug):
-    pivot = np.array([round(rcm[0]-r_off[0])*aug,round(rcm[1]-r_off[1])*aug])     # get relative center of mass (not global, but within the cropped region) 
-    padX = [img.shape[1] - pivot[0], pivot[0]]
-    padY = [img.shape[0] - pivot[1], pivot[1]]
-    imgP = np.pad(img, [padX, padY], 'constant')
-    imgR = ndimage.rotate(imgP, angle, reshape=False,order=0)
-    return imgR[(padY[0]):(-padY[1]), (padX[0]) : (-padX[1])],imgR
+'''Rotate coordinates around center of the image (compatible with cupy arrays)'''
+def rotate_coordinates(coords,image_shape, angle):       
+    angle_rad = math.radians(angle)
+    sin_theta = math.sin(angle_rad)
+    cos_theta = math.cos(angle_rad)
+    pivot_x = image_shape[1] / 2  # X-coordinate of the image center
+    pivot_y = image_shape[0] / 2  # Y-coordinate of the image center
+
+    rotated_coords = []
+    for x, y in coords:
+        translated_x = x - pivot_x
+        translated_y = y - pivot_y
+        rotated_x = translated_x * cos_theta - translated_y * sin_theta
+        rotated_y = translated_x * sin_theta + translated_y * cos_theta
+        rotated_x += pivot_x
+        rotated_y += pivot_y
+        rotated_coords.append((rotated_x, rotated_y))
+
+    return rotated_coords
 
 '''Eliminate repeated rows in 2D array while keeping the original order of the array'''
 def unique_rows_preserve_order(arr):

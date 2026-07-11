@@ -31,7 +31,7 @@ intracellular DNA/ribosome perturbation.
 | Script | Purpose |
 |---|---|
 | `analysis_functions_library.py` | Shared helper functions used across the single-cell scripts. |
-| `background_subtraction.py` | Local background subtraction of fluorescence images, masking dilated cell regions; GPU (cupy) accelerated. Adapted from Papagiannakis et al. |
+| `background_subtraction.py` | Local background subtraction of fluorescence images, masking dilated cell regions; GPU (cupy) accelerated.|
 | `import_processing_code.py` | Import linked OmniSegger per-cell MATLAB files → apply background subtraction → extract per-frame static features (area, nucleoid area, mean fluorescence, SCF, …). Outputs cropped-cell image dicts + a per-cell feature DataFrame. **Use for linked time-lapse data** (CJW7845, CJW7753, MG1655). |
 | `import_processing_no_linking_code.py` | Same idea but for **un-linked** data (segmentation + drift correction only): mask labelling, per-cell cropping, and feature extraction without trajectories. **Use for CJW7020 / CJW7859** fluorescent-AMP localization (imaged every 10 min). |
 | `post_processing_curation_functions.py` | Functions to compute instantaneous growth rate and curate trajectories (remove tracks that are too short, have anomalous growth rates, or lack the healthy-growth→arrest pattern). |
@@ -40,7 +40,7 @@ intracellular DNA/ribosome perturbation.
 
 - (membrane_permeabilization/) — timing of outer/inner
   membrane permeabilization and growth-inhibition onset (CJW7845).
-- (kymographs/) — medial-axis extraction and single-cell kymographs.
+- (kymographs/) — medial-axis extraction and single-cell kymographs (CJW7845).
 - (intracellular_perturbation/) — nucleoid masking,
   nucleoid/cell length, SCF, NC ratio, and time alignment (CJW7753).
 

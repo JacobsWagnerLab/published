@@ -60,10 +60,32 @@ def format_number_as_string(number):
     return formatted_number
 
 
+
+
 '''
-This function applies background subtraction to inpput img, using mask to remove cell mask regions (after dilation). Code adapted from (Papagiannakis et al.,bioRxiv, 2024).
+This function local_bkg_sub_cp applies background subtraction to inpput img, using mask to remove cell mask regions (after dilation). Code adapted from (Papagiannakis et al.,bioRxiv, 2024).
 It's modified to convert numpy arrays to cupy arrays to run on GPU.
 '''
+
+def get_median_back_img(img, img_cell_free, box_size, show_):
+    img_dim = img.shape
+    n_row = int(img_dim[0]/box_size)   # round to smallest integer
+    n_col = int(img_dim[1]/box_size)
+    # dim_new = n_row*box_size-sigma_, n_col*box_size-sigma_
+    median_back_img = cp.zeros(img_dim)
+    expand_window = False
+    for i in range(0,n_row):
+        for j in range(0,n_col):
+            box_temp = img_cell_free[i*box_size:(i+1)*box_size,j*box_size:(j+1)*box_size]
+            if np.any(box_temp>0)==False:
+                if show_:
+                    print('Using larger rolling window, too high cell density')
+                expand_window = True
+                return median_back_img, expand_window
+            else:    
+                median_back_img[i*box_size:(i+1)*box_size,j*box_size:(j+1)*box_size]=cp.median(box_temp[box_temp>0])
+    if show_:  print('Found correct box_size = ' + str(box_size))
+    return median_back_img, expand_window
 
 def local_bkg_sub_cp(img, mask, pos, exp, frame='',dilations=15, box_size = 128, sigma_=60, show=False):
     binary_mask = cp.asarray(mask>0)
@@ -166,6 +188,12 @@ def get_cell_coordinates(cell_stack_temp):   # given cell stack from supersegger
     return A, rcm, r_off, angle, x1, x2, y1, y2, edge_flag
 
 
+'''Eliminate repeated rows in 2D array while keeping the original order of the array'''
+def unique_rows_preserve_order(arr):
+    _, idx = np.unique(arr, axis=0, return_index=True)
+    unique_arr = arr[np.sort(idx)]
+    return unique_arr
+
 '''Returns cropped image of the mask and pads coordinates'''
 def get_pads(cell_mask,pad_off=100):    
     b=cp.where(cell_mask>0)
@@ -173,6 +201,10 @@ def get_pads(cell_mask,pad_off=100):
                      cp.min(b[0])-pad_off,cp.max(b[0])+pad_off])
     return cell_mask[pads[2]:pads[3],pads[0]:pads[1]], pads
 
+def closest_odd(x):
+    """Return the nearest odd integer to x (window_length for savgol_filter must be odd)."""
+    x = int(round(x))
+    return x if x % 2 == 1 else x + 1
 
 '''Medial axis functions'''
 
@@ -197,6 +229,25 @@ def calculate_euclidean_distance(coords, pixel_size, aug = 1):
     absolute_distances = np.insert(np.cumsum(distances), 0, 0)
     return distances[1:], absolute_distances[1:]
 
+'''Flip medial axis if during the trajectory the coordinates flip'''
+def flip_medial_axis(medial_axis,prev_medial_axis, show = True):   # according to the previous frame medial_axis, flip medialaxis (or not)
+    p1_prev = prev_medial_axis[0]               # first pole of previous medial axies (no specific order)
+    p2_prev = prev_medial_axis[-1]              # second pole
+    p1_curr = medial_axis[0]
+    p2_curr = medial_axis[-1]
+    a1 = np.abs(p1_curr - p1_prev)
+    b1 = np.abs(p2_curr - p2_prev)
+    c1 = np.max([a1, b1])
+    if c1 > len(medial_axis)/2:
+        if show:
+            print('medial axis needs to be reversed')
+        medial_axis = medial_axis[::-1]
+        p1_curr_n = medial_axis[0]
+        p2_curr_n = medial_axis[-1]
+        a1_n = np.abs(p1_curr_n - p1_prev)
+        b1_n = np.abs(p2_curr_n - p2_prev)
+        c1_n = np.max([a1_n, b1_n])
+    return medial_axis
 
 '''This function adds padding and rotates the image by specified angle. Uses cupy arrays'''
 def rotateImage_cp(img, angle, rcm, r_off, aug, rotate=True):
@@ -221,6 +272,41 @@ def rotateImage(img, angle, rcm , r_off, aug):
     imgP = np.pad(img, [padX, padY], 'constant')
     imgR = ndimage.rotate(imgP, angle, reshape=False,order=0)
     return imgR[(padY[0]):(-padY[1]), (padX[0]) : (-padX[1])],imgR
+
+
+'''Rotate coordinates around center of the image (compatible with cupy arrays)'''
+def rotate_coordinates(coords,image_shape, angle):      
+    angle_rad = math.radians(angle)
+    sin_theta = math.sin(angle_rad)
+    cos_theta = math.cos(angle_rad)
+    pivot_x = image_shape[1] / 2  # X-coordinate of the image center
+    pivot_y = image_shape[0] / 2  # Y-coordinate of the image center
+
+    rotated_coords = []
+    for x, y in coords:
+        translated_x = x - pivot_x
+        translated_y = y - pivot_y
+        rotated_x = translated_x * cos_theta - translated_y * sin_theta
+        rotated_y = translated_x * sin_theta + translated_y * cos_theta
+        rotated_x += pivot_x
+        rotated_y += pivot_y
+        rotated_coords.append((rotated_x, rotated_y))
+
+    return rotated_coords
+
+'''This function upsamples the image by b0 and b1 in x and y, used for subpixel computation of medial axis from binary cell mask. Uses cupy arrays.'''
+def tile_array_cp(a, b0, b1):
+    r, c = a.shape                                    # number of rows/columns
+    x = cp.repeat(a, b0, axis=0)                      # repeat rows
+    x = cp.repeat(x, b1, axis=1)                      # repeat columns
+    return x
+
+'''Same as above but for numpy arrays'''
+def tile_array(a, b0, b1):
+    r, c = a.shape                                    # number of rows/columns
+    rs, cs = a.strides                                # row/column strides 
+    x = as_strided(a, (r, b0, c, b1), (rs, 0, cs, 0)) # view a as larger 4D array
+    return x.reshape(r*b0, c*b1)                      # create new 2D array
 
 '''
 This function computes medial axis given the cropped cell mask:
